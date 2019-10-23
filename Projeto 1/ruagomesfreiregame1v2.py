@@ -11,8 +11,7 @@ with open("mapasgraph2.pickle", "rb") as fp:   #Unpickling
     AA = pickle.load(fp)
 U = AA[1]
 for i in U:
-    print (i)
-
+        print (i)
 def plotpath(P,coords):
         img = plt.imread('maps.png')
         plt.imshow(img)
@@ -74,7 +73,7 @@ tinittotal = time.process_time()
 
 print("\n(2 val) Exercise 1 - One agent, No limits")
 print("Init [30] Goal [56]")
-SP = SearchProblem(goal = [35], model = U, auxheur=coords)
+SP = SearchProblem(goal = [56], model = U, auxheur=coords)
 tinit = time.process_time()
 I = [30]
 nn = SP.search(I,limitexp = 2000)
