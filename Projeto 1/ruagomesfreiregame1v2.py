@@ -10,8 +10,7 @@ with open("coords.pickle", "rb") as fp:   # Unpickling
 with open("mapasgraph2.pickle", "rb") as fp:   #Unpickling
     AA = pickle.load(fp)
 U = AA[1]
-for i in U:
-        print (i)
+
 def plotpath(P,coords):
         img = plt.imread('maps.png')
         plt.imshow(img)
