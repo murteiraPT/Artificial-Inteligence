@@ -100,6 +100,7 @@ class SearchProblem:
         for i in range(len(goal)):
             self.agents.append(Agent(self.graph, goal[i]))
 
+<<<<<<< HEAD
     def prettyPrint(self, i, j, k):
         output = []
 
@@ -149,6 +150,7 @@ class SearchProblem:
 
         return True
 
+
     def search(self, init, limitexp = 2000, limitdepth = 10, tickets = [math.inf,math.inf,math.inf], anyorder=False):
         listOfWays = []
         for i in range(len(init)):
@@ -176,6 +178,7 @@ class SearchProblem:
         #DEBUG START
         for i in listOfWays:
             print("Agente Numero X:  ", len(i))
+
             for j in i:
                 print (j)
         #DEBUG END
