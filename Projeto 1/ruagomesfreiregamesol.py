@@ -33,7 +33,8 @@ class Agent:
     def BFS(self):
         queue = []
         queueEnd = []
-        queue.append(self.init)
+        source = Node(self.init)
+        queue.append(source)
         target = Node(self.goal)
         queueEnd.append(target)
 
@@ -88,35 +89,39 @@ class SearchProblem:
         self.agents = []
         for i in range(len(goal)):
             self.agents.append(Agent(self.graph, goal[i]))
-    
-    def resolveListOfWays(self, listOfWays):
 
+    def resolveListOfWays(self, listOfWays):
         '''
-                print("LIST OF WAYS")
-                for i in listOfWays:
-                    print (i)
-                '''
-                '''
-                for i in listOfWays:
-                    taxi = 0
-                    bus = 0
-                    metro = 0
-                    for j in range (1, len(i)):
-                        if i[j][0][0] == 0: taxi +=1
-                        if i[j][0][0] == 1: bus +=1
-                        if i[j][0][0] == 2: metro +=1
-                    if tickets[0]>taxi and tickets[1]>bus and tickets[2]>metro:
-                        return i
-                '''
-        return blabasfhouerfoeq
+        print("LIST OF WAYS")
+        for i in listOfWays:
+            print (i)
+        for i in listOfWays:
+            taxi = 0
+            bus = 0
+            metro = 0
+            for j in range (1, len(i)):
+                if i[j][0][0] == 0: taxi +=1
+                if i[j][0][0] == 1: bus +=1
+                if i[j][0][0] == 2: metro +=1
+            if tickets[0]>taxi and tickets[1]>bus and tickets[2]>metro:
+                return i
+        '''
+        #return blabasfhouerfoeq
+        return 0
 
     def search(self, init, limitexp = 2000, limitdepth = 10, tickets = [math.inf,math.inf,math.inf], anyorder=False):
         listOfWays = []
         for i in range(len(init)):
-            agents[i].init = init[i]
-        for i in agents:
-            listOfways.append(i.BFS())
-        
-        print(listOfWays)
+            self.agents[i].init = init[i]
+        for i in self.agents:
+            listOfWays.append(i.BFS())
+
+        #DEBUG START
+        for i in listOfWays:
+            print("Agente Numero X:")
+            for j in i:
+                print (j)
+        #DEBUG END
+
         return 0
         #return resolveListOfWays(listOfWays)
