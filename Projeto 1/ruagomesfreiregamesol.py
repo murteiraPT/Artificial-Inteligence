@@ -10,8 +10,10 @@ class Node:
         self.transport = None
 
 class Agent:
-    def __init__(self, graph):
+    def __init__(self, graph, goal):
         self.graph = graph
+        self.goal = goal
+        self.init = None
 
     def returnFormat(self, nodeLeft, nodeRight):
         solution = []
@@ -28,11 +30,11 @@ class Agent:
             nodeRight = nodeRight.parent
         return solution
 
-    def BFS(self, source, goal, tickets):
+    def BFS(self):
         queue = []
         queueEnd = []
-        queue.append(source)
-        target = Node(goal)
+        queue.append(self.init)
+        target = Node(self.goal)
         queueEnd.append(target)
 
         bateram = False
@@ -76,8 +78,20 @@ class Agent:
             if bateram:
                 for i in intersection:
                     listOfWays.append(self.returnFormat(i[0], i[1]))
+                return listOfWays
 
-                '''
+
+class SearchProblem:
+    def __init__(self, goal, model, auxheur = []):
+        self.graph = model
+        self.heur = auxheur
+        self.agents = []
+        for i in range(len(goal)):
+            self.agents.append(Agent(self.graph, goal[i]))
+    
+    def resolveListOfWays(self, listOfWays):
+
+        '''
                 print("LIST OF WAYS")
                 for i in listOfWays:
                     print (i)
@@ -94,19 +108,15 @@ class Agent:
                     if tickets[0]>taxi and tickets[1]>bus and tickets[2]>metro:
                         return i
                 '''
-                return listOfWays
-
-
-class SearchProblem:
-    def __init__(self, goal, model, auxheur = []):
-        self.graph = model
-        self.goal = goal[0]
-        self.heur = auxheur
+        return blabasfhouerfoeq
 
     def search(self, init, limitexp = 2000, limitdepth = 10, tickets = [math.inf,math.inf,math.inf], anyorder=False):
-        path = []
-
-        currentnode = Node(init[0])
-        neighbours = self.graph[currentnode.index]
-        path = self.BFS(currentnode, self.goal, tickets)
-        return path
+        listOfWays = []
+        for i in range(len(init)):
+            agents[i].init = init[i]
+        for i in agents:
+            listOfways.append(i.BFS())
+        
+        print(listOfWays)
+        return 0
+        #return resolveListOfWays(listOfWays)
