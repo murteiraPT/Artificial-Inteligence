@@ -8,41 +8,27 @@ class Node:
         self.index = index
         self.parent = None
         self.transport = None
-        self.custo = 0
-    
-class SearchProblem:
-    def __init__(self, goal, model, auxheur = []):
-        self.graph = model
-        self.goal = goal[0]
-        self.heur = auxheur
-    
+
+class Agent:
+    def __init__(self, graph):
+        self.graph = graph
+
     def returnFormat(self, nodeLeft, nodeRight):
         solution = []
 
         while nodeLeft is not None:
             if nodeLeft.transport is not None:
-                solution.insert(0, [[nodeLeft.transport],[nodeLeft.index]]) 
+                solution.insert(0, [[nodeLeft.transport],[nodeLeft.index]])
             else:
                 solution.insert(0, [[], [nodeLeft.index]])
             nodeLeft = nodeLeft.parent
-    
+
         while nodeRight.parent is not None:
             solution.append([[nodeRight.transport], [nodeRight.parent.index]])
             nodeRight = nodeRight.parent
         return solution
 
-    def search(self, init, limitexp = 2000, limitdepth = 10, tickets = [math.inf,math.inf,math.inf], anyorder=False):
-        path = []
-        
-        currentnode = Node(init[0])
-        print(currentnode.index)
-        neighbours = self.graph[currentnode.index]
-        path = self.BFS(currentnode, self.goal, tickets)
-        return path
-    
-
     def BFS(self, source, goal, tickets):
-        custo = 0
         queue = []
         queueEnd = []
         queue.append(source)
@@ -57,7 +43,7 @@ class SearchProblem:
         while queue or queueEnd:
             s = queue.pop(0)
             t = queueEnd.pop(0)
-            
+
             # if s.index == t.index:
             #     intersection.append([s, t])
             #     bateram = True
@@ -67,28 +53,36 @@ class SearchProblem:
                 newNode.parent = s
                 newNode.transport = i[0]
                 queue.append(newNode)
-            
+            '''
             for a in queue:
                 for b in queueEnd:
-                    if a.index == b.index: 
+                    if a.index == b.index:
                         intersection.append([a,b])
                         bateram = True
-            
+            '''
+
             for j in self.graph[t.index]:
                 newNode = Node(j[1])
                 newNode.parent = t
                 newNode.transport = j[0]
                 queueEnd.append(newNode)
-            
+
             for a in queue:
                 for b in queueEnd:
-                    if a.index == b.index: 
+                    if a.index == b.index:
                         intersection.append([a,b])
                         bateram = True
-            
+
             if bateram:
-                for i in intersection:  
+                for i in intersection:
                     listOfWays.append(self.returnFormat(i[0], i[1]))
+
+                '''
+                print("LIST OF WAYS")
+                for i in listOfWays:
+                    print (i)
+                '''
+                '''
                 for i in listOfWays:
                     taxi = 0
                     bus = 0
@@ -99,15 +93,20 @@ class SearchProblem:
                         if i[j][0][0] == 2: metro +=1
                     if tickets[0]>taxi and tickets[1]>bus and tickets[2]>metro:
                         return i
+                '''
+                return listOfWays
 
 
-                
-                
+class SearchProblem:
+    def __init__(self, goal, model, auxheur = []):
+        self.graph = model
+        self.goal = goal[0]
+        self.heur = auxheur
 
+    def search(self, init, limitexp = 2000, limitdepth = 10, tickets = [math.inf,math.inf,math.inf], anyorder=False):
+        path = []
 
-
-
-
-
- 
-  
+        currentnode = Node(init[0])
+        neighbours = self.graph[currentnode.index]
+        path = self.BFS(currentnode, self.goal, tickets)
+        return path
