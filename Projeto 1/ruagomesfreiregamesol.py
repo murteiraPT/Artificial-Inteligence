@@ -138,21 +138,22 @@ class SearchProblem:
         for x in range(1, len(i)):
             if not (i[x][1] != j[x][1] and j[x][1] != k[x][1] and i[x][1] != k[x][1]):
                 return False
-        print 
-        '''
-        taxi = 0
-        bus = 0
-        metro = 0
-        for x in range (1, len(i)):
-
-
-        for j in range (1, len(i)):
-            if i[j][0][0] == 0: taxi +=1
-            if i[j][0][0] == 1: bus +=1
-            if i[j][0][0] == 2: metro +=1
-        if tickets[0]>taxi and tickets[1]>bus and tickets[2]>metro:
-            return i
-        '''
+        
+        taxi = tickets[0]
+        bus = tickets[1]
+        metro = tickets[2]
+        for x in range (1, len(i)):            
+            if i[x][0][0] == 0: taxi -=1
+            if i[x][0][0] == 1: bus -=1
+            if i[x][0][0] == 2: metro -=1            
+            if j[x][0][0] == 0: taxi -=1
+            if j[x][0][0] == 1: bus -=1
+            if j[x][0][0] == 2: metro -=1            
+            if k[x][0][0] == 0: taxi -=1
+            if k[x][0][0] == 1: bus -=1
+            if k[x][0][0] == 2: metro -=1
+            if taxi<0 or bus<0 or metro<0: return False    
+        
 
         return True
 
