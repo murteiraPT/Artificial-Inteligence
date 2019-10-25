@@ -88,7 +88,7 @@ class Agent:
                     if len(myList) > numberOfFounded:
                         numberOfFounded = len(myList)
 
-            if numberOfFounded > 5:
+            if numberOfFounded > 6:
                 return listOfWays
 
 
@@ -100,9 +100,15 @@ class SearchProblem:
         for i in range(len(goal)):
             self.agents.append(Agent(self.graph, goal[i]))
 
-<<<<<<< HEAD
     def prettyPrint(self, i, j, k):
-        output = []
+        output = [[[], [i[0][1][0], j[0][1][0], k[0][1][0]]]]
+        for x in range (1, len(i)):
+            trans =[i[x][0][0], j[x][0][0], k[x][0][0]]
+            posit =[i[x][1][0], j[x][1][0], k[x][1][0]]
+            output.append([trans, posit])
+        return output
+
+
 
 
 
@@ -117,11 +123,11 @@ class SearchProblem:
         metro = 0
 
         for j in range (1, len(listOfWays)):
-
-            if [j][0] == 0: taxi +=1
-            if [j][0] == 1: bus +=1
-            if [j][0] == 2: metro +=1
-        if tickets[0]>taxi and tickets[1]>bus and tickets[2]>metro:
+            if listOfWays[j][0][0] == 0: taxi +=1
+            if listOfWays[j][0][0] == 1: bus +=1
+            if listOfWays[j][0][0] == 2: metro +=1
+            
+        if tickets[0]>=taxi and tickets[1]>=bus and tickets[2]>=metro:
             return listOfWays
 
 
@@ -130,9 +136,9 @@ class SearchProblem:
             return False
 
         for x in range(1, len(i)):
-            if not (i[x][1] != j[x][1] != k[x][1]):
+            if not (i[x][1] != j[x][1] and j[x][1] != k[x][1] and i[x][1] != k[x][1]):
                 return False
-
+        print 
         '''
         taxi = 0
         bus = 0
@@ -157,7 +163,7 @@ class SearchProblem:
             self.agents[i].init = init[i]
         for i in self.agents:
             listOfWays.append(i.BFS())
-
+        
         if len(listOfWays) == 1:
             for i in listOfWays[0]:
                 tmp = self.resolveListOfWays(i, tickets)
@@ -168,20 +174,7 @@ class SearchProblem:
                 for j in listOfWays[1]:
                     for k in listOfWays[2]:
                         if self.verifyCombination(i, j, k, tickets):
-                            print(i)
-                            print(j)
-                            print(k)
                             return self.prettyPrint(i, j, k)
 
-        #comb = combinations([listOfWays[0], listOfWays[1], listOfWays[2]], 3)
-
-        #DEBUG START
-        for i in listOfWays:
-            print("Agente Numero X:  ", len(i))
-
-            for j in i:
-                print (j)
-        #DEBUG END
-
         return 0
-        #return resolveListOfWays(listOfWays)
+
