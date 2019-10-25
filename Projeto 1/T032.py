@@ -52,22 +52,11 @@ class Agent:
             s = queue.pop(0)
             t = queueEnd.pop(0)
 
-            # if s.index == t.index:
-            #     intersection.append([s, t])
-            #     bateram = True
-
             for i in self.graph[s.index]:
                 newNode = Node(i[1])
                 newNode.parent = s
                 newNode.transport = i[0]
                 queue.append(newNode)
-            '''
-            for a in queue:
-                for b in queueEnd:
-                    if a.index == b.index:
-                        intersection.append([a,b])
-                        bateram = True
-            '''
 
             for j in self.graph[t.index]:
                 newNode = Node(j[1])
@@ -109,16 +98,7 @@ class SearchProblem:
             output.append([trans, posit])
         return output
 
-
-
-
-
-
-
     def resolveListOfWays(self, listOfWays, tickets):
-        '''
-        for i in listOfWays:
-        '''
         taxi = 0
         bus = 0
         metro = 0
