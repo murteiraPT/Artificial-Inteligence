@@ -1,8 +1,9 @@
+#Antonio Marques Murteira   numero : 90706
+#Joao Carlos Lopes          numero : 90732
+
 import math
 import pickle
 import time
-from itertools import combinations
-
 
 class Node:
     def __init__(self, index):
